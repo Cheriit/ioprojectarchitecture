@@ -1,4 +1,5 @@
-# Project for Software Engineering
+# Project for Software Engineering ![Build status](https://travis-ci.com/Cheriit/bank-zbozowy-mvn.svg?branch=main)
+
 
 Project for Software Engineering classes at Poznan University of Technology.
 
