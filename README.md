@@ -1,7 +1,7 @@
-# Project for Software Engineering ![Build status](https://travis-ci.com/Cheriit/ioprojectarchitecture.svg?branch=main)
+# Scenario Quality Checker project for Software Engineering ![Build status](https://travis-ci.com/Cheriit/ioprojectarchitecture.svg?branch=main)
 
 
-Project for Software Engineering classes at Poznan University of Technology.
+Scenario Quality Checker project for Software Engineering classes at Poznan University of Technology.
 
 ## Team
 - [Filip Szóstak](https://github.com/Cheriit) - ScrumMaster
