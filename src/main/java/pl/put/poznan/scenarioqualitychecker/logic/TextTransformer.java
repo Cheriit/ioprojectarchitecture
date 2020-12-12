@@ -1,6 +1,6 @@
-package pl.put.poznan.transformer.logic;
+package pl.put.poznan.scenarioqualitychecker.logic;
 
-import pl.put.poznan.transformer.logic.models.*;
+import pl.put.poznan.scenarioqualitychecker.logic.models.*;
 
 /**
  * This is just an example to show that the logic should be outside the REST service.
@@ -19,6 +19,7 @@ public class TextTransformer {
         // of course, normally it would do something based on the transforms
         return text.toUpperCase();
     }
+
     public void UseCaseExample()
     {
         MainScenario main = new MainScenario("Dodanie książki");
@@ -27,13 +28,13 @@ public class TextTransformer {
         main.head.actors.add(a);
         main.head.system_actors.add(a2);
 
-        main.add_step(new Step("Bibliotekarz wybiera..."));
-        main.add_step(new Step("Wyświetla się..."));
-        main.add_step(new Step("Bibliotekarz podaje..."));
+        main.addStep(new Step("Bibliotekarz wybiera..."));
+        main.addStep(new Step("Wyświetla się..."));
+        main.addStep(new Step("Bibliotekarz podaje..."));
         Scenario s = new Scenario("IF Bibliotekarz...");
-        main.add_step(s);
-        s.add_step(new Step("Bibliotekarz wybiera..."));
-        s.add_step(new Step("System prezentuje..."));
+        main.addStep(s);
+        s.addStep(new Step("Bibliotekarz wybiera..."));
+        s.addStep(new Step("System prezentuje..."));
 
     }
 }

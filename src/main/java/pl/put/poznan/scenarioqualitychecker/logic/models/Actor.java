@@ -1,6 +1,4 @@
-package pl.put.poznan.transformer.logic.models;
-
-import java.util.ArrayList;
+package pl.put.poznan.scenarioqualitychecker.logic.models;
 
 public class Actor {
     public String name;

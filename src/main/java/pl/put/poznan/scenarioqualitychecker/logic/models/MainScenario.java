@@ -1,6 +1,4 @@
-package pl.put.poznan.transformer.logic.models;
-
-import java.util.ArrayList;
+package pl.put.poznan.scenarioqualitychecker.logic.models;
 
 public class MainScenario extends Scenario{
     public Header head;
@@ -8,6 +6,5 @@ public class MainScenario extends Scenario{
     {
         super(_name);
         head = new Header(_name);
-        depth = 0;
     }
 }

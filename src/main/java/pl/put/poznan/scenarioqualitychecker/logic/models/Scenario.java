@@ -1,4 +1,4 @@
-package pl.put.poznan.transformer.logic.models;
+package pl.put.poznan.scenarioqualitychecker.logic.models;
 
 import java.util.ArrayList;
 
@@ -14,9 +14,8 @@ public class Scenario extends Step{
         super(_text);
         steps = new ArrayList<Step>();
     }
-    public void add_step(Step _s)
+    public void addStep(Step _s)
     {
-        _s.depth=this.depth+1;
         _s.number=steps.size();
         steps.add(_s);
     }
