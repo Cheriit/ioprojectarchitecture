@@ -6,6 +6,7 @@ public class Header {
     public String title;
     public ArrayList<Actor>actors;
     public ArrayList<Actor>system_actors;
+
     public Header(String _title)
     {
         title=_title;

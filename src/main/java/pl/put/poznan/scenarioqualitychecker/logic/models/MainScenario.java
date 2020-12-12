@@ -1,6 +1,6 @@
 package pl.put.poznan.scenarioqualitychecker.logic.models;
 
-public class MainScenario extends Scenario{
+public class MainScenario extends Scenario {
     public Header head;
     public  MainScenario(String _name)
     {
