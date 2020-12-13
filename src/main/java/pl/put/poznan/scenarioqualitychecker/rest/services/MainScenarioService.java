@@ -41,7 +41,7 @@ public class MainScenarioService {
 	
 	/**
 	 * Saves a new scenario in the database.
-	 * @param scenario
+	 * @param scenario to save
 	 */
 	@Transactional(readOnly = false)
 	public void create(MainScenario scenario) {
@@ -51,7 +51,7 @@ public class MainScenarioService {
 	
 	/**
 	 * Deletes a scenario from the database.
-	 * @param scenario
+	 * @param scenario to delete
 	 */
 	@Transactional(readOnly = false)
 	public void delete(MainScenario scenario) {
@@ -72,7 +72,7 @@ public class MainScenarioService {
 
 	/**
 	 * Fetches all scenarios from repository.
-	 * @return
+	 * @return all scenarios
 	 */
 	public List<MainScenario> findAll() {
 		return mainScenarioRepository.findAll();
