@@ -3,7 +3,7 @@ package pl.put.poznan.scenarioqualitychecker.logic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.put.poznan.scenarioqualitychecker.logic.models.*;
-import pl.put.poznan.scenarioqualitychecker.rest.TextTransformerController;
+import pl.put.poznan.scenarioqualitychecker.rest.controllers.TextTransformerController;
 import pl.put.poznan.scenarioqualitychecker.visitors.ScenarioStepCounterVisitor;
 
 /**
@@ -12,6 +12,7 @@ import pl.put.poznan.scenarioqualitychecker.visitors.ScenarioStepCounterVisitor;
 public class TextTransformer {
 
     private final String[] transformations;
+    
     Logger logger = LoggerFactory.getLogger(TextTransformerController.class);
     
     public TextTransformer() {
@@ -29,8 +30,8 @@ public class TextTransformer {
 
     public void useCaseExample() {
         MainScenario main = new MainScenario("Dodanie książki");
-        Actor a = new Actor("Bibliotekarz",ActorType.external_actor);
-        Actor a2 = new Actor("System",ActorType.system_actor);
+        Actor a = new Actor("Bibliotekarz",ActorType.EXTERNAL_ACTOR);
+        Actor a2 = new Actor("System",ActorType.SYSTEM_ACTOR);
         main.getHead().getActors().add(a);
         main.getHead().getSystemActors().add(a2);
         

@@ -1,6 +1,7 @@
 package pl.put.poznan.scenarioqualitychecker.visitors;
 
 import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 import pl.put.poznan.scenarioqualitychecker.logic.models.Step;
 
@@ -12,7 +13,9 @@ import pl.put.poznan.scenarioqualitychecker.logic.models.Step;
  */
 public class ScenarioStepCounterVisitor implements Visitor {
 
-    private Integer step_counter = 0;
+    private Integer stepCounter = 0;
+    Logger logger = LoggerFactory.getLogger(ScenarioStepCounterVisitor.class);
+    
     public ScenarioStepCounterVisitor() {}
 
     /**
@@ -22,17 +25,18 @@ public class ScenarioStepCounterVisitor implements Visitor {
     @Override
     public void visit(Step step) {
         if (step != null) {
-            step_counter++;
-            LoggerFactory.getLogger(ScenarioStepCounterVisitor.class).debug(String.format("Found new step no. %d: %s.", step_counter, step.getText()));
+            stepCounter++;
+            logger.debug(String.format("Found new step no. %d: %s.", 
+            				stepCounter, step.getContent()));
         } else {
-            LoggerFactory.getLogger(ScenarioStepCounterVisitor.class).debug("Visited null value.");
+            logger.debug("Visited null value.");
         }
     }
 
-    public Integer getCounter() { return step_counter; }
+    public Integer getCounter() { return stepCounter; }
 
     /**
      * Method resetting counter.
      */
-    public void resetCounter() { step_counter = 0; }
+    public void resetCounter() { stepCounter = 0; }
 }

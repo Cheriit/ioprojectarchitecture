@@ -1,11 +1,10 @@
 package pl.put.poznan.scenarioqualitychecker.logic.models;
 
-import pl.put.poznan.scenarioqualitychecker.logic.Acceptor;
-import pl.put.poznan.scenarioqualitychecker.visitors.Visitor;
-
 import java.util.ArrayList;
 
-public class Scenario extends Step implements Acceptor {
+import pl.put.poznan.scenarioqualitychecker.visitors.Visitor;
+
+public class Scenario extends Step {
     protected ArrayList<Step> steps;
     
     public ArrayList<Step> getSteps() {

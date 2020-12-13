@@ -1,20 +1,17 @@
 package pl.put.poznan.scenarioqualitychecker.logic.models;
 
-import pl.put.poznan.scenarioqualitychecker.logic.Acceptor;
+import pl.put.poznan.scenarioqualitychecker.logic.Acceptable;
 import pl.put.poznan.scenarioqualitychecker.visitors.Visitor;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class Step implements Acceptor {
-    private String text;
+public class Step implements Acceptable {
+    private String content;
     private int number;
     
-    public ArrayList<Step> getSteps() {
-        return new ArrayList<Step>();
-    }
-    
-    public Step(String text) {
-        this.text = text;
+    public Step(String content) {
+        this.content = content;
     }
 
     /**
@@ -27,12 +24,12 @@ public class Step implements Acceptor {
         visitor.visit(this);
     }
 
-	public String getText() {
-		return text;
+	public String getContent() {
+		return content;
 	}
 
-	public void setText(String text) {
-		this.text = text;
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 	public int getNumber() {

@@ -2,7 +2,7 @@ package pl.put.poznan.scenarioqualitychecker.logic.models;
 
 public class Actor {
     private String name;
-    private  ActorType actorType;
+    private ActorType actorType;
     
     public Actor(String name, ActorType actorType) {
         this.name = name;
