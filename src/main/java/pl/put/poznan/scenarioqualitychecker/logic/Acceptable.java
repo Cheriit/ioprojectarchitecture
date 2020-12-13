@@ -3,11 +3,11 @@ package pl.put.poznan.scenarioqualitychecker.logic;
 import pl.put.poznan.scenarioqualitychecker.visitors.Visitor;
 
 /**
- * Acceptor.java
+ * Acceptable.java
  * Interface class implementing Visitor Design Pattern, implementing following method.
  *
  */
-public interface Acceptor {
+public interface Acceptable {
 
     /**
      * Method accepting given visitor, passing it further into data structure.

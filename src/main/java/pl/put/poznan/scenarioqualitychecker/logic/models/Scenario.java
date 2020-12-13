@@ -1,26 +1,36 @@
 package pl.put.poznan.scenarioqualitychecker.logic.models;
 
-import pl.put.poznan.scenarioqualitychecker.logic.Acceptor;
-import pl.put.poznan.scenarioqualitychecker.visitors.Visitor;
-
 import java.util.ArrayList;
 
-public class Scenario extends Step implements Acceptor {
-    protected ArrayList<Step>steps;
-    public ArrayList<Step> get_steps()
-    {
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.OneToMany;
+
+import java.util.List;
+import pl.put.poznan.scenarioqualitychecker.visitors.Visitor;
+
+@Entity
+@Inheritance
+public class Scenario extends Step {
+	
+	@OneToMany(targetEntity=Step.class, cascade=CascadeType.ALL)
+    protected List<Step> steps;
+    
+    public List<Step> getSteps() {
         return steps;
     }
 
-    public Scenario(String _text)
-    {
-        super(_text);
-        steps = new ArrayList<Step>();
+    public Scenario() { super(); }
+    
+    public Scenario(String text) {
+        super(text);
+        this.steps = new ArrayList<Step>();
     }
-    public void addStep(Step _s)
-    {
-        _s.number=steps.size();
-        steps.add(_s);
+    
+    public void addStep(Step step) {
+        step.setNumber(steps.size());
+        steps.add(step);
     }
 
     /**
