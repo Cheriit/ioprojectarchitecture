@@ -1,6 +1,10 @@
 package pl.put.poznan.scenarioqualitychecker.logic;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import pl.put.poznan.scenarioqualitychecker.logic.models.*;
+import pl.put.poznan.scenarioqualitychecker.rest.TextTransformerController;
+import pl.put.poznan.scenarioqualitychecker.visitors.ScenarioStepCounterVisitor;
 
 /**
  * This is just an example to show that the logic should be outside the REST service.
@@ -22,6 +26,7 @@ public class TextTransformer {
 
     public void UseCaseExample()
     {
+        Logger logger = LoggerFactory.getLogger(TextTransformerController.class);
         MainScenario main = new MainScenario("Dodanie książki");
         Actor a = new Actor("Bibliotekarz",ActorType.external_actor);
         Actor a2 = new Actor("System",ActorType.system_actor);
@@ -36,5 +41,8 @@ public class TextTransformer {
         s.addStep(new Step("Bibliotekarz wybiera..."));
         s.addStep(new Step("System prezentuje..."));
 
+        ScenarioStepCounterVisitor counterVisitor = new ScenarioStepCounterVisitor();
+
+        main.accept(counterVisitor);
     }
 }
