@@ -19,6 +19,8 @@ public class Step implements Acceptable {
     private String content;
     private int number;
     
+    public Step() {}
+    
     public Step(String content) {
         this.content = content;
     }

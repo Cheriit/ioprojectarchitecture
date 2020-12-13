@@ -13,6 +13,8 @@ public class Header {
     private List<Actor> actors;
     private List<Actor> systemActors;
 
+    public Header() {}
+    
     public Header(String title) {
         this.title = title;
         this.actors = new ArrayList<Actor>();

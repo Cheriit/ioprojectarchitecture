@@ -14,6 +14,8 @@ public class Scenario extends Step {
         return steps;
     }
 
+    public Scenario() { super(); }
+    
     public Scenario(String text) {
         super(text);
         this.steps = new ArrayList<Step>();
