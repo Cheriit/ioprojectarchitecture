@@ -58,7 +58,7 @@ public class MainScenarioController {
 	/**
 	 * Updates requested scenario
 	 * @param id scenario's id
-	 * @param scenario scenario's body with updated fields
+	 * @param updatedScenario scenario's body with updated fields
 	 * @return status code and message
 	 */
 	@PutMapping(value="/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
