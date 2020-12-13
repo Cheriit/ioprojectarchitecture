@@ -1,50 +1,93 @@
 package pl.put.poznan.scenarioqualitychecker.rest.controllers;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import pl.put.poznan.scenarioqualitychecker.logic.models.MainScenario;
+import pl.put.poznan.scenarioqualitychecker.rest.services.MainScenarioService;
 
+/**
+ * This controller handles the basic REST requests.
+ */
 @RestController
 @RequestMapping("/")
 public class MainScenarioController {
+	
+	MainScenarioService mainScenarioService;
 
-	@RequestMapping(value="/{name}", method=RequestMethod.GET, 
-			produces=MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseEntity<MainScenario> getScenario(@PathVariable("name") String name) {
-		//TODO: implement
-		return new ResponseEntity<>(new MainScenario(""), HttpStatus.OK);
+	@Autowired
+	public MainScenarioController(MainScenarioService mainScenarioService) {
+		this.mainScenarioService = mainScenarioService;
 	}
 	
-	@RequestMapping(value="/{name}", method=RequestMethod.PUT,
-			produces=MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseEntity<String> updateScenario(@RequestBody MainScenario scenario) {
-		//TODO: implement
-		return new ResponseEntity<>("", HttpStatus.OK);
-	}
-	
-	@RequestMapping(value="/{name}", method=RequestMethod.DELETE,
-			produces=MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseEntity<String> deleteScenario(@PathVariable("name") String name) {
-		//TODO: implement
-		return new ResponseEntity<>("", HttpStatus.OK);
-	}
-	
-	@RequestMapping(method=RequestMethod.POST, produces=MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseEntity<String> createScenerio(@RequestBody MainScenario scenario) {
+	/**
+	 * Returns requested scenario
+	 * @param name Scenario's name
+	 * @return scenario
+	 */
+	@GetMapping(value="/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity<MainScenario> getScenario(@PathVariable("id") String id) {
+		MainScenario mainScenario = mainScenarioService.findById(id);
 		
+		if(mainScenario == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(mainScenario, HttpStatus.OK);
+	}
+	
+	/**
+	 * Updates requested scenario
+	 * @param scenario scenario's body with updated fields
+	 * @return status code and message
+	 */
+	@PutMapping(value="/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity<String> updateScenario(@PathVariable("id") String id, 
+			@RequestBody MainScenario updatedScenario) {
+		MainScenario scenario = mainScenarioService.findById(id);
+		if(scenario == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		
+		mainScenarioService.update(scenario, updatedScenario);
+		return new ResponseEntity<>("Scanerio updated.", HttpStatus.OK);
+	}
+	
+	/**
+	 * Deletes requested scenario.
+	 * @param name scenario's name
+	 * @return status code and message
+	 */
+	@DeleteMapping(value="/{name}",	produces=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity<String> deleteScenario(@PathVariable("id") String id) {
+		MainScenario scenario = mainScenarioService.findById(id);
+		
+		if(scenario == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		
+		mainScenarioService.delete(scenario);
 		return new ResponseEntity<>("", HttpStatus.OK);
 	}
 	
-	
+	/**
+	 * Creates a new scenario.
+	 * @param scenario scenario's body
+	 * @return status code and message
+	 */
+	@PostMapping(produces=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity<String> createScenerio(@RequestBody MainScenario scenario) {
+		mainScenarioService.create(scenario);
+		return new ResponseEntity<>("", HttpStatus.OK);
+	}
 }

@@ -3,7 +3,6 @@ package pl.put.poznan.scenarioqualitychecker.logic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import pl.put.poznan.scenarioqualitychecker.logic.models.*;
-import pl.put.poznan.scenarioqualitychecker.rest.controllers.TextTransformerController;
 import pl.put.poznan.scenarioqualitychecker.visitors.ScenarioStepCounterVisitor;
 
 /**
@@ -13,7 +12,7 @@ public class TextTransformer {
 
     private final String[] transformations;
     
-    Logger logger = LoggerFactory.getLogger(TextTransformerController.class);
+    Logger logger = LoggerFactory.getLogger(TextTransformer.class);
     
     public TextTransformer() {
         transformations = new String[]{};
@@ -28,7 +27,7 @@ public class TextTransformer {
         return text.toUpperCase();
     }
 
-    public void useCaseExample() {
+    public static MainScenario useCaseExample() {
         MainScenario main = new MainScenario("Dodanie książki");
         Actor a = new Actor("Bibliotekarz",ActorType.EXTERNAL_ACTOR);
         Actor a2 = new Actor("System",ActorType.SYSTEM_ACTOR);
@@ -46,5 +45,7 @@ public class TextTransformer {
         ScenarioStepCounterVisitor counterVisitor = new ScenarioStepCounterVisitor();
 
         main.accept(counterVisitor);
+        
+        return main;
     }
 }

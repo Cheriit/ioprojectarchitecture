@@ -1,6 +1,18 @@
 package pl.put.poznan.scenarioqualitychecker.logic.models;
 
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Actor {
+
+	@Id
+	@GeneratedValue
+	private String id;
+	
     private String name;
     private ActorType actorType;
     
@@ -23,5 +35,13 @@ public class Actor {
 
 	public void setActorType(ActorType actorType) {
 		this.actorType = actorType;
+	}
+	
+	public String getId() {
+		return id;
+	}
+	
+	public void setId(String id) {
+		this.id = id;
 	}
 }

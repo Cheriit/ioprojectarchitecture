@@ -6,7 +6,16 @@ import pl.put.poznan.scenarioqualitychecker.visitors.Visitor;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Step implements Acceptable {
+	
+	@Id
+	@GeneratedValue
+	private String id;
     private String content;
     private int number;
     
@@ -40,4 +49,11 @@ public class Step implements Acceptable {
 		this.number = number;
 	}
     
+	public String getId() {
+		return id;
+	}
+	
+	public void setId(String id) {
+		this.id = id;
+	}
 }

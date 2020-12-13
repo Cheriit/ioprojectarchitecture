@@ -2,8 +2,11 @@ package pl.put.poznan.scenarioqualitychecker.logic.models;
 
 import java.util.ArrayList;
 
+import javax.persistence.Entity;
+
 import pl.put.poznan.scenarioqualitychecker.visitors.Visitor;
 
+@Entity
 public class Scenario extends Step {
     protected ArrayList<Step> steps;
     
