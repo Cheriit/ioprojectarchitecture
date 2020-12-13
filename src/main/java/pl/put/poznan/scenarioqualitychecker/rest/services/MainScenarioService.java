@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pl.put.poznan.scenarioqualitychecker.logic.TextTransformer;
 import pl.put.poznan.scenarioqualitychecker.logic.models.MainScenario;
 import pl.put.poznan.scenarioqualitychecker.persistence.repositories.MainScenarioRepository;
 
