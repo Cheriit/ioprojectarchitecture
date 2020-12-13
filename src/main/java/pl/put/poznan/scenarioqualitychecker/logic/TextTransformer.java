@@ -12,27 +12,28 @@ import pl.put.poznan.scenarioqualitychecker.visitors.ScenarioStepCounterVisitor;
 public class TextTransformer {
 
     private final String[] transforms;
-    public TextTransformer(){
+    Logger logger = LoggerFactory.getLogger(TextTransformerController.class);
+    
+    public TextTransformer() {
         transforms = new String[]{};
     }
-    public TextTransformer(String[] transforms){
+    
+    public TextTransformer(String[] transforms) {
         this.transforms = transforms;
     }
 
-    public String transform(String text){
+    public String transform(String text) {
         // of course, normally it would do something based on the transforms
         return text.toUpperCase();
     }
 
-    public void UseCaseExample()
-    {
-        Logger logger = LoggerFactory.getLogger(TextTransformerController.class);
+    public void useCaseExample() {
         MainScenario main = new MainScenario("Dodanie książki");
         Actor a = new Actor("Bibliotekarz",ActorType.external_actor);
         Actor a2 = new Actor("System",ActorType.system_actor);
-        main.head.actors.add(a);
-        main.head.system_actors.add(a2);
-
+        main.getHead().getActors().add(a);
+        main.getHead().getSystemActors().add(a2);
+        
         main.addStep(new Step("Bibliotekarz wybiera..."));
         main.addStep(new Step("Wyświetla się..."));
         main.addStep(new Step("Bibliotekarz podaje..."));

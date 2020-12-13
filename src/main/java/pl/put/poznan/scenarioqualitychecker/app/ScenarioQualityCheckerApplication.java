@@ -9,9 +9,8 @@ import pl.put.poznan.scenarioqualitychecker.logic.TextTransformer;
 public class ScenarioQualityCheckerApplication {
 
     public static void main(String[] args) {
-
         TextTransformer t = new TextTransformer();
-        t.UseCaseExample();
+        t.useCaseExample();
         SpringApplication.run(ScenarioQualityCheckerApplication.class, args);
     }
 }

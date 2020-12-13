@@ -6,21 +6,20 @@ import pl.put.poznan.scenarioqualitychecker.visitors.Visitor;
 import java.util.ArrayList;
 
 public class Scenario extends Step implements Acceptor {
-    protected ArrayList<Step>steps;
-    public ArrayList<Step> get_steps()
-    {
+    protected ArrayList<Step> steps;
+    
+    public ArrayList<Step> getSteps() {
         return steps;
     }
 
-    public Scenario(String _text)
-    {
-        super(_text);
-        steps = new ArrayList<Step>();
+    public Scenario(String text) {
+        super(text);
+        this.steps = new ArrayList<Step>();
     }
-    public void addStep(Step _s)
-    {
-        _s.number=steps.size();
-        steps.add(_s);
+    
+    public void addStep(Step step) {
+        step.setNumber(steps.size());
+        steps.add(step);
     }
 
     /**

@@ -1,10 +1,18 @@
 package pl.put.poznan.scenarioqualitychecker.logic.models;
 
 public class MainScenario extends Scenario {
-    public Header head;
-    public  MainScenario(String _name)
-    {
-        super(_name);
-        head = new Header(_name);
+    private Header head;
+    
+    public  MainScenario(String name) {
+        super(name);
+        this.head = new Header(name);
     }
+
+	public Header getHead() {
+		return head;
+	}
+
+	public void setHead(Header head) {
+		this.head = head;
+	}
 }

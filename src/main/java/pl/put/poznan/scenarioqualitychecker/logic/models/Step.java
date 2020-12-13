@@ -6,15 +6,15 @@ import pl.put.poznan.scenarioqualitychecker.visitors.Visitor;
 import java.util.ArrayList;
 
 public class Step implements Acceptor {
-    public String text;
-    public int number;
-    public ArrayList<Step> get_steps()
-    {
+    private String text;
+    private int number;
+    
+    public ArrayList<Step> getSteps() {
         return new ArrayList<Step>();
     }
-    public Step(String _text)
-    {
-        text= _text;
+    
+    public Step(String text) {
+        this.text = text;
     }
 
     /**
@@ -26,4 +26,21 @@ public class Step implements Acceptor {
     public void accept(Visitor visitor) {
         visitor.visit(this);
     }
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public int getNumber() {
+		return number;
+	}
+
+	public void setNumber(int number) {
+		this.number = number;
+	}
+    
 }

@@ -1,8 +1,8 @@
 package pl.put.poznan.scenarioqualitychecker.visitors;
 
 import org.slf4j.LoggerFactory;
+
 import pl.put.poznan.scenarioqualitychecker.logic.models.Step;
-import pl.put.poznan.scenarioqualitychecker.rest.TextTransformerController;
 
 /**
  * ScenarioStepCounterVisitor.java
@@ -23,7 +23,7 @@ public class ScenarioStepCounterVisitor implements Visitor {
     public void visit(Step step) {
         if (step != null) {
             step_counter++;
-            LoggerFactory.getLogger(ScenarioStepCounterVisitor.class).debug(String.format("Found new step no. %d: %s.", step_counter, step.text));
+            LoggerFactory.getLogger(ScenarioStepCounterVisitor.class).debug(String.format("Found new step no. %d: %s.", step_counter, step.getText()));
         } else {
             LoggerFactory.getLogger(ScenarioStepCounterVisitor.class).debug("Visited null value.");
         }
