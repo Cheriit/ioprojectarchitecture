@@ -42,7 +42,7 @@ public class MainScenarioController {
 	
 	/**
 	 * Returns requested scenario
-	 * @param name Scenario's name
+	 * @param id Scenario's id
 	 * @return scenario
 	 */
 	@GetMapping(value="/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
@@ -57,6 +57,7 @@ public class MainScenarioController {
 	
 	/**
 	 * Updates requested scenario
+	 * @param id scenario's id
 	 * @param scenario scenario's body with updated fields
 	 * @return status code and message
 	 */
@@ -74,7 +75,7 @@ public class MainScenarioController {
 	
 	/**
 	 * Deletes requested scenario.
-	 * @param name scenario's name
+	 * @param id scenario's id
 	 * @return status code and message
 	 */
 	@DeleteMapping(value="/{name}",	produces=MediaType.APPLICATION_JSON_VALUE)
