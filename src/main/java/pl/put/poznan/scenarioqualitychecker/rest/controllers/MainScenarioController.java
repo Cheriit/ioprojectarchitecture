@@ -1,5 +1,8 @@
 package pl.put.poznan.scenarioqualitychecker.rest.controllers;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -31,6 +34,12 @@ public class MainScenarioController {
 		this.mainScenarioService = mainScenarioService;
 	}
 	
+	@GetMapping(produces=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity<List<MainScenario>> getAllScenarios() {
+		List<MainScenario> scenarios = mainScenarioService.findAll();
+		return new ResponseEntity<>(scenarios, HttpStatus.OK);
+	}
+	
 	/**
 	 * Returns requested scenario
 	 * @param name Scenario's name
@@ -38,12 +47,12 @@ public class MainScenarioController {
 	 */
 	@GetMapping(value="/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity<MainScenario> getScenario(@PathVariable("id") String id) {
-		MainScenario mainScenario = mainScenarioService.findById(id);
+		Optional<MainScenario> mainScenario = mainScenarioService.findById(id);
 		
-		if(mainScenario == null) {
+		if(!mainScenario.isPresent()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<>(mainScenario, HttpStatus.OK);
+		return new ResponseEntity<>(mainScenario.get(), HttpStatus.OK);
 	}
 	
 	/**
@@ -54,12 +63,12 @@ public class MainScenarioController {
 	@PutMapping(value="/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity<String> updateScenario(@PathVariable("id") String id, 
 			@RequestBody MainScenario updatedScenario) {
-		MainScenario scenario = mainScenarioService.findById(id);
-		if(scenario == null) {
+		Optional<MainScenario> scenario = mainScenarioService.findById(id);
+		if(!scenario.isPresent()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		
-		mainScenarioService.update(scenario, updatedScenario);
+		mainScenarioService.update(scenario.get(), updatedScenario);
 		return new ResponseEntity<>("Scanerio updated.", HttpStatus.OK);
 	}
 	
@@ -70,13 +79,13 @@ public class MainScenarioController {
 	 */
 	@DeleteMapping(value="/{name}",	produces=MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity<String> deleteScenario(@PathVariable("id") String id) {
-		MainScenario scenario = mainScenarioService.findById(id);
+		Optional<MainScenario> scenario = mainScenarioService.findById(id);
 		
-		if(scenario == null) {
+		if(!scenario.isPresent()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 		
-		mainScenarioService.delete(scenario);
+		mainScenarioService.delete(scenario.get());
 		return new ResponseEntity<>("", HttpStatus.OK);
 	}
 	

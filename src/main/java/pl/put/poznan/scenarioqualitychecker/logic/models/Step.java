@@ -1,20 +1,19 @@
 package pl.put.poznan.scenarioqualitychecker.logic.models;
 
-import pl.put.poznan.scenarioqualitychecker.logic.Acceptable;
-import pl.put.poznan.scenarioqualitychecker.visitors.Visitor;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import pl.put.poznan.scenarioqualitychecker.logic.Acceptable;
+import pl.put.poznan.scenarioqualitychecker.visitors.Visitor;
+
 @Entity
 public class Step implements Acceptable {
 	
-	@Id
-	@GeneratedValue
+	@Id @GeneratedValue(generator="system-uuid")
+	@GenericGenerator(name="system-uuid", strategy = "uuid")
 	private String id;
     private String content;
     private int number;

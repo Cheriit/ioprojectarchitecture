@@ -1,6 +1,15 @@
 package pl.put.poznan.scenarioqualitychecker.logic.models;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.OneToOne;
+
+@Entity
+@Inheritance
 public class MainScenario extends Scenario {
+	
+	@OneToOne(targetEntity=Header.class, cascade=CascadeType.ALL)
     private Header head;
     
     public MainScenario() { super(); }

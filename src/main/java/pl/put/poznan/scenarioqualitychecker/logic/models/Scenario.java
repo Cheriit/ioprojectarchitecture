@@ -2,15 +2,22 @@ package pl.put.poznan.scenarioqualitychecker.logic.models;
 
 import java.util.ArrayList;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.OneToMany;
 
+import java.util.List;
 import pl.put.poznan.scenarioqualitychecker.visitors.Visitor;
 
 @Entity
+@Inheritance
 public class Scenario extends Step {
-    protected ArrayList<Step> steps;
+	
+	@OneToMany(targetEntity=Step.class, cascade=CascadeType.ALL)
+    protected List<Step> steps;
     
-    public ArrayList<Step> getSteps() {
+    public List<Step> getSteps() {
         return steps;
     }
 

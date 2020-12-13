@@ -1,13 +1,18 @@
 package pl.put.poznan.scenarioqualitychecker.rest.services;
 
 
+import java.util.List;
+import java.util.Optional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import pl.put.poznan.scenarioqualitychecker.logic.TextTransformer;
 import pl.put.poznan.scenarioqualitychecker.logic.models.MainScenario;
+import pl.put.poznan.scenarioqualitychecker.persistence.repositories.MainScenarioRepository;
 
 /**
  * This service handles the basic CRUD operations on Scenarios
@@ -16,6 +21,13 @@ import pl.put.poznan.scenarioqualitychecker.logic.models.MainScenario;
 @Transactional(readOnly = true)
 public class MainScenarioService {
 	
+	MainScenarioRepository mainScenarioRepository;
+
+	@Autowired
+	public MainScenarioService(MainScenarioRepository mainScenarioRepository) {
+		this.mainScenarioRepository = mainScenarioRepository;
+	}
+	
 	Logger logger = LoggerFactory.getLogger(MainScenarioService.class);
 	
 	/**
@@ -23,9 +35,8 @@ public class MainScenarioService {
 	 * @param id scenario id
 	 * @return scenario
 	 */
-	public MainScenario findById(String id) {
-		//TODO: implement real repository
-		return TextTransformer.useCaseExample();
+	public Optional<MainScenario> findById(String id) {
+		return mainScenarioRepository.findById(id);
 	}
 	
 	/**
@@ -34,6 +45,7 @@ public class MainScenarioService {
 	 */
 	@Transactional(readOnly = false)
 	public void create(MainScenario scenario) {
+		mainScenarioRepository.save(scenario);
 		logger.debug("Creating scenario...");
 	}
 	
@@ -43,6 +55,7 @@ public class MainScenarioService {
 	 */
 	@Transactional(readOnly = false)
 	public void delete(MainScenario scenario) {
+		mainScenarioRepository.delete(scenario);
 		logger.debug("Deleting scenario...");
 	}
 	
@@ -53,6 +66,15 @@ public class MainScenarioService {
 	 */
 	@Transactional(readOnly = false)
 	public void update(MainScenario oldScenario, MainScenario newScenario) {
+		//TODO: Implement
 		logger.debug("Updating scenario...");
+	}
+
+	/**
+	 * Fetches all scenarios from repository.
+	 * @return
+	 */
+	public List<MainScenario> findAll() {
+		return mainScenarioRepository.findAll();
 	}
 }
