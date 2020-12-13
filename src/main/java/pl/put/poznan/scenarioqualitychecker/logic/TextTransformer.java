@@ -11,15 +11,15 @@ import pl.put.poznan.scenarioqualitychecker.visitors.ScenarioStepCounterVisitor;
  */
 public class TextTransformer {
 
-    private final String[] transforms;
+    private final String[] transformations;
     Logger logger = LoggerFactory.getLogger(TextTransformerController.class);
     
     public TextTransformer() {
-        transforms = new String[]{};
+        transformations = new String[]{};
     }
     
-    public TextTransformer(String[] transforms) {
-        this.transforms = transforms;
+    public TextTransformer(String[] transformations) {
+        this.transformations = transformations;
     }
 
     public String transform(String text) {
