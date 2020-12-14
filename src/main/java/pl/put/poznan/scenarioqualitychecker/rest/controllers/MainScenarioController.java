@@ -99,7 +99,7 @@ public class MainScenarioController {
 	 * @param id Scenario's id
 	 * @return scenario's step count
 	 */
-	@GetMapping(value="/{id}/stepCount", produces=MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(value="/{id}/step_count", produces=MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody ResponseEntity<Integer> getScenarioStepCount(@PathVariable("id") String id) {
 		Optional<MainScenario> mainScenario = mainScenarioService.findById(id);
 
