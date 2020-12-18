@@ -114,7 +114,7 @@ public class MainScenarioController {
 	/**
 	 * Returns requested scenario without nodes over depth limit
 	 * @param id Scenario's id
-	 * @param depth maximum node depth(main scenario is zero)
+	 * @param depthLimit maximum node depth(main scenario is zero)
 	 * @return scenario
 	 */
 	@GetMapping(value="/{id}/getScenarioLimitedByDepth/{depth}", produces=MediaType.APPLICATION_JSON_VALUE)
