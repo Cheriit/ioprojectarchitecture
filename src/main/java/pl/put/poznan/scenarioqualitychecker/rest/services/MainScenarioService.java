@@ -89,4 +89,8 @@ public class MainScenarioService {
 		scenario.accept(visitor);
 		return visitor.getCounter();
 	}
+	public MainScenario getScenarioLimitedByDepth(MainScenario scenario, int depth)
+	{
+			return (MainScenario)scenario.getLimitedDepthCopy(depth);
+	}
 }
