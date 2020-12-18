@@ -111,4 +111,21 @@ public class MainScenarioController {
 		return new ResponseEntity<>(scenarioStepCount, HttpStatus.OK);
 	}
 
+	/**
+	 * Returns requested scenario without nodes over depth limit
+	 * @param id Scenario's id
+	 * @param depth maximum node depth(main scenario is zero)
+	 * @return scenario
+	 */
+	@GetMapping(value="/{id}/getScenarioLimitedByDepth/{depth}", produces=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity<MainScenario> getScenarioLimitedByDepth(@PathVariable("id") String id,@PathVariable("depth") int depth) {
+		Optional<MainScenario> mainScenario = mainScenarioService.findById(id);
+
+		if(!mainScenario.isPresent()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+
+		MainScenario LimitedScenario = mainScenarioService.getScenarioLimitedByDepth(mainScenario.get(),depth);
+		return new ResponseEntity<>(LimitedScenario, HttpStatus.OK);
+	}
 }
