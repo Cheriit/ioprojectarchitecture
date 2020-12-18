@@ -8,7 +8,6 @@ import org.hibernate.annotations.GenericGenerator;
 
 import pl.put.poznan.scenarioqualitychecker.logic.Acceptable;
 import pl.put.poznan.scenarioqualitychecker.visitors.Visitor;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 @Entity
 public class Step implements Acceptable {
@@ -63,14 +62,7 @@ public class Step implements Acceptable {
 	 * Return this scenario to defined depth limit
 	 *
 	 * @param depthLimit limit od depth in the tree we want to see
+	 * @return result Step
 	 */
-	public Step getLimitedDepthCopy(int depthLimit) {
-		if (depthLimit>=0){
-			return this;
-		}
-		else
-		{
-			throw new NotImplementedException();
-		}
-	}
+	public Step getLimitedDepthCopy(int depthLimit) { return this; }
 }

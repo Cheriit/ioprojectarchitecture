@@ -63,7 +63,7 @@ public class MainScenarioController {
 		}
 		
 		mainScenarioService.update(scenario.get(), updatedScenario);
-		return new ResponseEntity<>("Scanerio updated.", HttpStatus.OK);
+			return new ResponseEntity<>("Scanerio updated.", HttpStatus.OK);
 	}
 	
 	/**

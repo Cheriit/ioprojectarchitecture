@@ -1,7 +1,5 @@
 package pl.put.poznan.scenarioqualitychecker.logic.models;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
@@ -34,6 +32,7 @@ public class MainScenario extends Scenario {
 	 * Return this scenario to defined depth limit
 	 *
 	 * @param depthLimit limit od depth in the tree we want to see
+	 * @return result Step
 	 */
 	@Override
 	public Step getLimitedDepthCopy(int depthLimit) {
@@ -41,10 +40,6 @@ public class MainScenario extends Scenario {
 		result.setId(this.getId());
 		result.setNumber(this.getNumber());
 		result.setHead(this.head);
-		if(depthLimit<0)
-		{
-			throw new NotImplementedException();
-		}
 		if (depthLimit>0){
 			for(int i=0;i<this.steps.size();i++){
 				Step child = this.steps.get(i).getLimitedDepthCopy(depthLimit-1);
