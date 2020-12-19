@@ -75,7 +75,39 @@ Returns json data about all scenarios.
 * **Error Response:**
 
   * **Code:** 404 NOT FOUND <br />
-**Content:** `None
+**Content:** `None`
+
+**getScenarioKeywordCount**
+  returns number of steps starting with a certain keyword
+  
+* **URL**
+  
+  /:id/keywords
+  
+* **Method:**
+
+  `GET`
+  
+* **URL Params**
+
+  **Required:**
+ 
+   `id=[String]`
+   `keyword = [String]`
+
+* **Data Params**
+
+  None
+  
+* **Success Response:**
+
+  * **Code:** 200 <br />
+**Content:** Integer
+ 
+* **Error Response:**
+
+  * **Code:** 404 NOT FOUND <br />
+**Content:** `None`
 
 **updateScenario**
 ----
@@ -108,7 +140,7 @@ Returns json data about all scenarios.
 * **Error Response:**
 
   * **Code:** 404 NOT FOUND <br />
-**Content:** `None
+**Content:** `None`
 
 **deleteScenario**
 ----
@@ -140,7 +172,7 @@ Returns json data about all scenarios.
 * **Error Response:**
 
   * **Code:** 404 NOT FOUND <br />
-**Content:** `None
+**Content:** `None`
 
 **createScenerio**
 ----
@@ -172,7 +204,7 @@ None
 * **Error Response:**
 
   * **Code:** 404 NOT FOUND <br />
-**Content:** `None
+**Content:** `None`
 
 **getScenarioStepCount**
 ----
@@ -204,7 +236,7 @@ None
 * **Error Response:**
 
   * **Code:** 404 NOT FOUND <br />
-**Content:** `None
+**Content:** `None`
 
 **getScenarioLimitedByDepth**
 ----
