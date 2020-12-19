@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pl.put.poznan.scenarioqualitychecker.logic.ActorList;
-import pl.put.poznan.scenarioqualitychecker.logic.StepList;
 import pl.put.poznan.scenarioqualitychecker.logic.models.Actor;
 import pl.put.poznan.scenarioqualitychecker.logic.models.Header;
 import pl.put.poznan.scenarioqualitychecker.logic.models.MainScenario;
@@ -85,7 +83,6 @@ public class MainScenarioService {
 	public void update(MainScenario oldScenario, MainScenario newScenario) {
 		updateHeader(oldScenario.getHead(), newScenario.getHead());
 		updateScenario(oldScenario, newScenario);
-		//updateStep(oldScenario, newScenario);
 		logger.debug("Scenario updated.");
 	}
 	
@@ -103,6 +100,11 @@ public class MainScenarioService {
 		}
 	}
 	
+	/**
+	 * Updates a header of a scenario.
+	 * @param oldHeader current header
+	 * @param newHeader updated header
+	 */
 	@Transactional(readOnly = false)
 	public void updateHeader(Header oldHeader, Header newHeader) {
 		if(!oldHeader.getTitle().equals(newHeader.getTitle()))
@@ -113,61 +115,13 @@ public class MainScenarioService {
 
 		addNewActors(oldHeader.getActors(), newHeader.getActors());
 		addNewActors(oldHeader.getSystemActors(), newHeader.getSystemActors());
-		
-//		ActorList oldActors = new ActorList(oldHeader.getActors());
-//		ActorList newActors = new ActorList(newHeader.getActors());
-//		
-//		updateActorList(oldActors, newActors);
-//		
-//		ActorList oldSystemActors = new ActorList(oldHeader.getSystemActors());
-//		ActorList newSystemActors = new ActorList(newHeader.getSystemActors());
-//		
-//		updateActorList(oldSystemActors, newSystemActors);
 	}
 	
-//	@Transactional(readOnly = false)
-//	private void updateActorList(ActorList oldActors, ActorList newActors) {
-//		for(Actor actor : newActors) {
-//			Optional<Actor> oldActor = oldActors.findById(actor.getId());
-//		
-//			if(oldActor.isPresent()) {
-//				updateActor(oldActor.get(), actor);
-//			} else {
-//				Actor newActor = actorRepository.save(actor);
-//				oldActors.add(newActor);
-//			}
-//		}
-//
-//		List<Actor> toDelete = new ArrayList<>();
-//		for(Actor actor : oldActors) {
-//			Optional<Actor> newActor = newActors.findById(actor.getId());
-//			if(newActor.isEmpty()) {
-//				toDelete.add(actor);
-//			}
-//		}
-//		oldActors.removeAll(toDelete);
-//	}
-	
-//	@Transactional(readOnly = false)
-//	public void updateActor(Actor oldActor, Actor newActor) {
-//		if(!oldActor.getName().equals(newActor.getName()))
-//			oldActor.setName(newActor.getName());
-//		if(!oldActor.getActorType().equals(newActor.getActorType()))
-//			oldActor.setActorType(newActor.getActorType());
-//	}
-//	
-//	@Transactional(readOnly = false)
-//	public void updateStep(Step oldStep, Step newStep) {
-//		if(!oldStep.getContent().equals(newStep.getContent()))
-//			oldStep.setContent(newStep.getContent());
-//		if(oldStep.getNumber() != newStep.getNumber())
-//			oldStep.setNumber(newStep.getNumber());
-//		
-//		if(oldStep instanceof Scenario && newStep instanceof Scenario) {
-//			updateScenario((Scenario)oldStep, (Scenario)newStep);
-//		}
-//	}
-	
+	/**
+	 * Updates a specific scenario.
+	 * @param oldScenario current scenario
+	 * @param newScenario updated scenario
+	 */
 	@Transactional(readOnly = false)
 	public void updateScenario(Scenario oldScenario, Scenario newScenario) {
 		if(!oldScenario.getContent().equals(newScenario.getContent()))
@@ -196,39 +150,6 @@ public class MainScenarioService {
 			}
 			oldScenario.addStep(newStep);
 		}
-		
-//		StepList oldSteps = new StepList(oldScenario.getSteps());
-//		StepList newSteps = new StepList(newScenario.getSteps());
-//		
-//		List<Step> toDelete = new ArrayList<>();
-//		for(Step step : newSteps) {
-//			Optional<Step> oldStep = oldSteps.findById(step.getId());
-//			
-//			if(oldStep.isPresent()) {
-//				if(oldStep.get() instanceof Scenario && !(step instanceof Scenario)
-//						|| !(oldStep.get() instanceof Scenario) && step instanceof Scenario) {
-//					toDelete.add(oldStep.get());
-//					Step newStep = stepRepository.save(step);
-//					oldScenario.addStep(newStep);
-//				} else {
-//					updateStep(oldStep.get(), step);
-//				}
-//				
-//			} else {
-//				Step newStep = stepRepository.save(step);
-//				oldScenario.addStep(newStep);
-//			}
-//		}
-//		
-//		for(Step step : oldSteps) {
-//			Optional<Step> newStep = newSteps.findById(step.getId());
-//			
-//			if(newStep.isEmpty()) {
-//				toDelete.add(step);
-//			}
-//		}
-//		
-//		oldSteps.removeAll(toDelete);
 	}
 
 	/**
