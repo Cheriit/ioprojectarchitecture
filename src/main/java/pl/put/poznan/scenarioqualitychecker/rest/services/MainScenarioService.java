@@ -95,8 +95,7 @@ public class MainScenarioService {
 	 * @param depth maximum node depth(main scenario is zero)
 	 * @return MainScenario
 	 */
-	public MainScenario getScenarioLimitedByDepth(MainScenario scenario, int depth)
-	{
+	public MainScenario getScenarioLimitedByDepth(MainScenario scenario, int depth) {
 			return (MainScenario)scenario.getLimitedDepthCopy(depth);
 	}
 }
