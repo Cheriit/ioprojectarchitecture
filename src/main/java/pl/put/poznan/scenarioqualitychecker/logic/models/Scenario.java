@@ -14,7 +14,7 @@ import pl.put.poznan.scenarioqualitychecker.visitors.Visitor;
 @Inheritance
 public class Scenario extends Step {
 	
-	@OneToMany(targetEntity=Step.class, cascade=CascadeType.ALL)
+    @OneToMany(targetEntity=Step.class, cascade=CascadeType.ALL)
     protected List<Step> steps;
     
     public List<Step> getSteps() {
@@ -41,7 +41,7 @@ public class Scenario extends Step {
     @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
-        for (Step step: steps) {
+        for (Step step : steps) {
             step.accept(visitor);
         }
     }
@@ -57,11 +57,13 @@ public class Scenario extends Step {
         Scenario result = new Scenario(this.getContent());
         result.setId(this.getId());
         result.setNumber(this.getNumber());
-        if (depthLimit>0){
-            for(int i=0;i<this.steps.size();i++){
-                result.addStep(this.steps.get(i).getLimitedDepthCopy(depthLimit-1));
+	    
+        if (depthLimit > 0) {
+            for(int i = 0; i < this.steps.size(); i++) {
+                result.addStep(this.steps.get(i).getLimitedDepthCopy(depthLimit - 1));
             }
         }
+	    
         return result;
     }
 }
