@@ -1,17 +1,25 @@
 package pl.put.poznan.scenarioqualitychecker.rest.controllers;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
 import pl.put.poznan.scenarioqualitychecker.logic.models.MainScenario;
 import pl.put.poznan.scenarioqualitychecker.rest.services.MainScenarioService;
-
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 /**
  * This controller handles the basic REST requests.
@@ -36,16 +44,27 @@ public class MainScenarioController {
 	/**
 	 * Returns requested scenario
 	 * @param id Scenario's id
+	 * @param depth optional parameter; if set, requested senario will be returned without nodes over a depth limit
 	 * @return scenario
 	 */
 	@GetMapping(value="/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseEntity<MainScenario> getScenario(@PathVariable("id") String id) {
+	public @ResponseBody ResponseEntity<MainScenario> getScenario(
+			@PathVariable("id") String id, @RequestParam Optional<Integer> depth) {
 		Optional<MainScenario> mainScenario = mainScenarioService.findById(id);
 		
-		if(!mainScenario.isPresent()) {
+		if(mainScenario.isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-		return new ResponseEntity<>(mainScenario.get(), HttpStatus.OK);
+		
+		MainScenario mainScenarioUnpacked = null;
+		if(depth.isPresent()) {
+			mainScenarioUnpacked 
+				= mainScenarioService.getScenarioLimitedByDepth(mainScenario.get(), depth.get());
+		} else {
+			mainScenarioUnpacked = mainScenario.get();
+		}
+
+		return new ResponseEntity<>(mainScenarioUnpacked, HttpStatus.OK);
 	}
 	
 	/**
@@ -110,22 +129,23 @@ public class MainScenarioController {
 		Integer scenarioStepCount = mainScenarioService.getScenarioStepCount(mainScenario.get());
 		return new ResponseEntity<>(scenarioStepCount, HttpStatus.OK);
 	}
-
+	
 	/**
-	 * Returns requested scenario without nodes over depth limit
-	 * @param id Scenario's id
-	 * @param depth maximum node depth(main scenario is zero)
-	 * @return scenario
+	 * Returns the number of steps starting with a given keyword.
+	 * @param id main scenario id
+	 * @param keyword keyword to find
+	 * @return number of steps
 	 */
-	@GetMapping(value="/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody ResponseEntity<MainScenario> getScenarioLimitedByDepth(@PathVariable("id") String id, @RequestParam int depth) {
+	@GetMapping(value="/{id}/keywords", produces=MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody ResponseEntity<Integer> getScenarioKeywordCount(
+			@PathVariable("id") String id, @RequestParam String keyword) {
 		Optional<MainScenario> mainScenario = mainScenarioService.findById(id);
 
 		if(!mainScenario.isPresent()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
-
-		MainScenario LimitedScenario = mainScenarioService.getScenarioLimitedByDepth(mainScenario.get(), depth);
-		return new ResponseEntity<>(LimitedScenario, HttpStatus.OK);
+		
+		Integer scenarioKeywordCount = mainScenarioService.getScenarioKeywordCount(mainScenario.get(), keyword);
+		return new ResponseEntity<>(scenarioKeywordCount, HttpStatus.OK);
 	}
 }

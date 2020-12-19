@@ -20,6 +20,7 @@ import pl.put.poznan.scenarioqualitychecker.persistence.repositories.ActorReposi
 import pl.put.poznan.scenarioqualitychecker.persistence.repositories.MainScenarioRepository;
 import pl.put.poznan.scenarioqualitychecker.persistence.repositories.ScenarioRepository;
 import pl.put.poznan.scenarioqualitychecker.persistence.repositories.StepRepository;
+import pl.put.poznan.scenarioqualitychecker.visitors.KeywordCounterVisitor;
 import pl.put.poznan.scenarioqualitychecker.visitors.ScenarioStepCounterVisitor;
 
 /**
@@ -179,5 +180,18 @@ public class MainScenarioService {
 	 */
 	public MainScenario getScenarioLimitedByDepth(MainScenario scenario, int depth) {
 			return (MainScenario)scenario.getLimitedDepthCopy(depth);
+	}
+
+	/**
+	 * Returns the number of steps starting with a given keyword.
+	 * @param mainScenario scenario to process
+	 * @param keyword keyword to find
+	 * @return number of steps with a keyword
+	 */
+	public Integer getScenarioKeywordCount(MainScenario mainScenario, String keyword) {
+		KeywordCounterVisitor visitor = new KeywordCounterVisitor(keyword);
+		mainScenario.accept(visitor);
+		
+		return visitor.getCount();
 	}
 }
