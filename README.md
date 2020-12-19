@@ -94,6 +94,7 @@ Returns json data about all scenarios.
   **Required:**
  
    `id=[String]`
+   `scenario = [MainScenario]`
 
 * **Data Params**
 
@@ -211,13 +212,14 @@ None
 
 * **URL**
 
-  /:id/getScenarioLimitedByDepth/:depth
+  /:id
 
 * **Method:**
 
   `GET`
   
 *  **URL Params**
+  `depth`
 
   **Required:**
  
