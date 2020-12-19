@@ -78,6 +78,7 @@ Returns json data about all scenarios.
 **Content:** `None`
 
 **getScenarioKeywordCount**
+----
   returns number of steps starting with a certain keyword
   
 * **URL**
