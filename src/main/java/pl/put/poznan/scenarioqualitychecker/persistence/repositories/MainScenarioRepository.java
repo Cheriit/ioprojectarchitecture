@@ -9,5 +9,4 @@ import pl.put.poznan.scenarioqualitychecker.logic.models.MainScenario;
  * MainScenerio repository used for the persistence layer.
  */
 @Repository
-public interface MainScenarioRepository extends JpaRepository<MainScenario, String> {
-}
+public interface MainScenarioRepository extends JpaRepository<MainScenario, String> {}
