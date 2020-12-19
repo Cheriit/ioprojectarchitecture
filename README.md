@@ -45,6 +45,7 @@ Returns json data about all scenarios.
 
   * **Code:** 404 NOT FOUND <br />
 **Content:** None
+
 **getScenario**
 ----
   Returns json data about a scenario by id.
