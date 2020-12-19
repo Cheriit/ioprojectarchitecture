@@ -14,7 +14,7 @@ import pl.put.poznan.scenarioqualitychecker.visitors.Visitor;
 @Inheritance
 public class Scenario extends Step {
 	
-	@OneToMany(targetEntity=Step.class, cascade=CascadeType.ALL)
+    @OneToMany(targetEntity=Step.class, cascade=CascadeType.ALL)
     protected List<Step> steps;
     
     public List<Step> getSteps() {
@@ -27,7 +27,7 @@ public class Scenario extends Step {
         super(text);
         this.steps = new ArrayList<Step>();
     }
-    
+
     public void addStep(Step step) {
         step.setNumber(steps.size());
         steps.add(step);
@@ -41,8 +41,29 @@ public class Scenario extends Step {
     @Override
     public void accept(Visitor visitor) {
         visitor.visit(this);
-        for (Step step: steps) {
+        for (Step step : steps) {
             step.accept(visitor);
         }
+    }
+
+    /**
+     * Return this scenario to defined depth limit
+     *
+     * @param depthLimit limit od depth in the tree we want to see
+     * @return result Step
+     */
+    @Override
+    public Step getLimitedDepthCopy(int depthLimit) {
+        Scenario result = new Scenario(this.getContent());
+        result.setId(this.getId());
+        result.setNumber(this.getNumber());
+	    
+        if (depthLimit > 0) {
+            for(int i = 0; i < this.steps.size(); i++) {
+                result.addStep(this.steps.get(i).getLimitedDepthCopy(depthLimit - 1));
+            }
+        }
+	    
+        return result;
     }
 }

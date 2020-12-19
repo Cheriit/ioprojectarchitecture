@@ -57,4 +57,12 @@ public class Step implements Acceptable {
 	public void setId(String id) {
 		this.id = id;
 	}
+
+	/**
+	 * Return this scenario to defined depth limit
+	 *
+	 * @param depthLimit limit od depth in the tree we want to see
+	 * @return result Step
+	 */
+	public Step getLimitedDepthCopy(int depthLimit) { return this; }
 }
