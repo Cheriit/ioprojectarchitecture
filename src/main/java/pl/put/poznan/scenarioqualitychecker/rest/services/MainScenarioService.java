@@ -20,6 +20,7 @@ import pl.put.poznan.scenarioqualitychecker.persistence.repositories.ActorReposi
 import pl.put.poznan.scenarioqualitychecker.persistence.repositories.MainScenarioRepository;
 import pl.put.poznan.scenarioqualitychecker.persistence.repositories.ScenarioRepository;
 import pl.put.poznan.scenarioqualitychecker.persistence.repositories.StepRepository;
+import pl.put.poznan.scenarioqualitychecker.visitors.ScenarioStepCounterVisitor;
 
 /**
  * This service handles the basic CRUD operations on Scenarios
@@ -158,5 +159,16 @@ public class MainScenarioService {
 	 */
 	public List<MainScenario> findAll() {
 		return mainScenarioRepository.findAll();
+	}
+
+	/**
+	 * Fetches the main scenario.
+	 * @param scenario scenario
+	 * @return scenario's stepCount
+	 */
+	public Integer getScenarioStepCount(Scenario scenario) {
+		ScenarioStepCounterVisitor visitor = new ScenarioStepCounterVisitor();
+		scenario.accept(visitor);
+		return visitor.getCounter();
 	}
 }
