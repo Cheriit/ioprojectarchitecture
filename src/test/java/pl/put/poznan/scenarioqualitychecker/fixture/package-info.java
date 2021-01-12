@@ -1,0 +1,1 @@
+package pl.put.poznan.scenarioqualitychecker.fixture;
